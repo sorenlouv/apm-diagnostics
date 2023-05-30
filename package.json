@@ -1,6 +1,6 @@
 {
   "name": "apm-diagnostics",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Diagnostics...",
   "license": "MIT",
   "main": "./dist/index.js",

@@ -1,4 +1,4 @@
-Create `.env` file with the following options adopted your cluster:
+Create `.env` file with the following options adapted to your cluster:
 
 ```
 KIBANA_HOST="http://localhost:5601"
