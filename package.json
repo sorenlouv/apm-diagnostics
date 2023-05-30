@@ -4,7 +4,7 @@
   "description": "Diagnostics...",
   "license": "MIT",
   "bin": {
-    "backport": "./bin/apm-diagnostics"
+    "apm-diagnostics": "./bin/apm-diagnostics"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
