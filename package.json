@@ -3,6 +3,9 @@
   "version": "0.0.2",
   "description": "Diagnostics...",
   "license": "MIT",
+  "bin": {
+    "backport": "./bin/apm-diagnostics"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
