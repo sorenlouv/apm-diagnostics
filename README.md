@@ -6,3 +6,9 @@ ELASTICSEARCH_HOST="http://localhost:9200"
 USERNAME="elastic"
 PASSWORD="changeme"
 ```
+
+## Run
+
+```
+yarn start
+```
