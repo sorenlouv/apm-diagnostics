@@ -1,3 +1,11 @@
+## Install APM Diagnostics Tool
+
+```
+npm install -g apm-diagnostics
+```
+
+## Add credentials
+
 Create `.env` file with the following options adapted to your cluster:
 
 ```
@@ -10,5 +18,5 @@ PASSWORD="changeme"
 ## Run
 
 ```
-yarn start
+apm-diagnostics
 ```

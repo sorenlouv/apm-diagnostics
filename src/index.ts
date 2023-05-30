@@ -4,11 +4,13 @@ import { Client } from '@elastic/elasticsearch';
 import axios from 'axios';
 import { getApmIndices } from './get_apm_indices';
 import { getDiagnosticsReport } from './get_diagnostics_report';
+import { logger } from './logger';
 
-const ELASTICSEARCH_HOST = process.env.ELASTICSEARCH_HOST as string;
-const KIBANA_HOST = process.env.KIBANA_HOST as string;
-const USERNAME = process.env.USERNAME as string;
-const PASSWORD = process.env.PASSWORD as string;
+const ELASTICSEARCH_HOST =
+  process.env.ELASTICSEARCH_HOST ?? 'http://localhost:9200';
+const KIBANA_HOST = process.env.KIBANA_HOST ?? 'http://localhost:5601';
+const USERNAME = process.env.USERNAME ?? 'elastic';
+const PASSWORD = process.env.PASSWORD ?? 'changeme';
 
 async function init() {
   const esClient = new Client({
@@ -21,13 +23,22 @@ async function init() {
     auth: { username: USERNAME, password: PASSWORD },
   });
 
-  const apmIndices = await getApmIndices(kibanaClient);
-  const report = await getDiagnosticsReport(kibanaClient, esClient, apmIndices);
-  await fs.writeFile(
-    'diagnostics-report.json',
-    JSON.stringify(report, null, 2),
-    { encoding: 'utf8', flag: 'w' }
-  );
+  try {
+    const apmIndices = await getApmIndices(kibanaClient);
+    const report = await getDiagnosticsReport(
+      kibanaClient,
+      esClient,
+      apmIndices
+    );
+    const filename = 'diagnostics-report.json';
+    await fs.writeFile(filename, JSON.stringify(report, null, 2), {
+      encoding: 'utf8',
+      flag: 'w',
+    });
+    logger.info(`Diagnostics report written to "${filename}"`);
+  } catch (e) {
+    logger.error(e);
+  }
 }
 
 init();
