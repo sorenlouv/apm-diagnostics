@@ -1,13 +1,13 @@
 {
   "name": "apm-diagnostics",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Diagnostics...",
   "license": "MIT",
   "bin": {
     "apm-diagnostics": "./bin/apm-diagnostics"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.api.js",
+  "types": "./dist/index.api.d.ts",
   "scripts": {
     "lint": "tsc && eslint './**/*.{ts,js}'",
     "prepare": "husky install",
