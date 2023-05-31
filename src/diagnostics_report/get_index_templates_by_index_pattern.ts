@@ -1,8 +1,8 @@
 import { type Client } from '@elastic/elasticsearch';
 import { IndicesSimulateTemplateResponse } from '@elastic/elasticsearch/lib/api/types';
 import { orderBy } from 'lodash';
-import { getIndexTemplate } from '../index_templates/get_index_template';
-import { getApmIndexPatterns } from '../indices/get_indices';
+import { getIndexTemplate } from '../diagnostics_report/get_index_template';
+import { getApmIndexPatterns } from '../diagnostics_report/get_indices';
 import { ApmIndicesConfig } from '../types';
 
 export async function getIndexTemplatesByIndexPattern({

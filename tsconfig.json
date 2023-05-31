@@ -3,8 +3,8 @@
   "exclude": ["src/**/*.test.*", "src/test/**", "src/**/mocks/**"],
   "compilerOptions": {
     "declaration": true,
-    "target": "es2018",
-    "lib": ["es2019"],
+    "target": "es2021",
+    "lib": ["es2021"],
     "module": "commonjs",
     "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,

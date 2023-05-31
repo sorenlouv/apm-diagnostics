@@ -2,8 +2,9 @@ import 'dotenv/config';
 import fs from 'fs/promises';
 import { Client } from '@elastic/elasticsearch';
 import axios from 'axios';
-import { getApmIndices } from './get_apm_indices';
 import { getDiagnosticsReport } from './get_diagnostics_report';
+import { getApmIndices } from './kibana/get_apm_indices';
+import { getPackageInfo } from './kibana/get_package_info';
 import { logger } from './logger';
 
 const ELASTICSEARCH_HOST =
@@ -25,20 +26,22 @@ async function init() {
 
   try {
     const apmIndices = await getApmIndices(kibanaClient);
-    const report = await getDiagnosticsReport(
-      kibanaClient,
-      esClient,
-      apmIndices
-    );
-    const filename = 'diagnostics-report.json';
-    await fs.writeFile(filename, JSON.stringify(report, null, 2), {
-      encoding: 'utf8',
-      flag: 'w',
-    });
-    logger.info(`Diagnostics report written to "${filename}"`);
+    const packageInfo = await getPackageInfo(kibanaClient);
+    const report = await getDiagnosticsReport(esClient, apmIndices);
+    const combinedReport = { ...report, packageInfo };
+    await saveReportToFile(combinedReport);
   } catch (e) {
     logger.error(e);
   }
+}
+
+async function saveReportToFile(combinedReport: Record<string, any>) {
+  const filename = 'diagnostics-report.json';
+  await fs.writeFile(filename, JSON.stringify(combinedReport, null, 2), {
+    encoding: 'utf8',
+    flag: 'w',
+  });
+  logger.info(`Diagnostics report written to "${filename}"`);
 }
 
 init();

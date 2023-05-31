@@ -1,5 +1,5 @@
 import { type Client } from '@elastic/elasticsearch';
-import { getApmIndexPatterns } from '../indices/get_indices';
+import { getApmIndexPatterns } from '../diagnostics_report/get_indices';
 import { ApmIndicesConfig } from '../types';
 
 export async function getDataStreams({

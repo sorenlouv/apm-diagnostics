@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { ApmIndicesConfig } from './types';
+import { ApmIndicesConfig } from '../types';
 
 export async function getApmIndices(kibanaClient: AxiosInstance) {
   type Response = {
